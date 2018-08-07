@@ -1,0 +1,38 @@
+<h1>Eat Da Burger!</h1>
+
+<h3>Uneaten</h3>
+  <div class="row"></div>
+    {{#each burgers}}
+      {{#unless this.devoured}}
+        <div class="col-md-5">
+          <button class="devour" id={{this.id}} data-id={{this.id}}>{{this.burgername}} </button>
+        </div>
+        {{/unless}}
+        {{/each}}    
+  </div>
+  <div class "right-side">
+  <h3>Devoured</h3>
+    <div class="row">
+      {{#each burgers}}
+        {{#if this.devoured}}
+          <div class="col-md-5">
+            <h5>{{this.burgername}}</h5>
+          </div>
+          {{/if}}
+        {{/each}}
+    </div>
+</div>
+
+
+<h2>Add Burger</h2>
+<form class="add-burger">
+
+  <div class="form">
+    <label for="burger">Burger Name:</label>
+    <input type="text" id="burger" name="burgername">
+  </div>
+
+  
+  <button type="submit">Add Burger</button>
+</form>
+</div>

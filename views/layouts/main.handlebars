@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Burgers</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+  {{{ body }}}
+
+
+  <script src="/js/burgerFE.js"></script>
+</body>
+<script>
+    $(".devour").on("click", function (event) {
+        console.log("devoured")
+        var id = $(this).data("id");
+        console.log(id);
+        var devoured = 1
+        var eaten = {
+            devoured: devoured
+        };
+        $.ajax("/burgers/" + id, {
+            type: "PUT",
+            data: eaten
+        }).then(
+            function () {
+                console.log("changed devour to " + eaten);
+                location.reload();
+            }
+        );
+    });
+   
+    $(".add-burger").on("submit", function (evevnt) {
+        event.preventDefault();
+        var newburger = {
+            name: $("#burger").val().trim(),
+        };
+        $("#burger").val("");
+        $.ajax("/create/burgers", {
+            type: "POST",
+            data: newburger
+        }).then(
+            function () {
+                console.log("created burger");
+                location.reload();
+            }
+        );
+    });
+</script>
+
+</html>
